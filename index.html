@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyager AI — Your Intelligent Trip Planner</title>
+    <meta name="description"
+        content="Plan your perfect trip with AI-powered personalized itineraries tailored to your budget, interests, and real-time conditions. Seamless booking included.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo">
+                <i class="fas fa-paper-plane"></i>
+                <span>Voyager<span class="logo-ai">AI</span></span>
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#plan" class="nav-link" data-section="plan">Plan Trip</a>
+                <a href="#destinations" class="nav-link" data-section="destinations">Destinations</a>
+                <a href="#features" class="nav-link" data-section="features">Features</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-ghost" id="btn-saved-trips">
+                    <i class="fas fa-heart"></i>
+                    <span>Saved</span>
+                </button>
+                <button class="btn btn-primary" id="btn-start-planning">
+                    <i class="fas fa-magic"></i>
+                    <span>Start Planning</span>
+                </button>
+            </div>
+            <button class="nav-toggle" id="nav-toggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80')">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=80')">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=1920&q=80')">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&q=80')">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                <span>Powered by Advanced AI</span>
+            </div>
+            <h1 class="hero-title">
+                Your Dream Trip,<br>
+                <span class="gradient-text">Intelligently Planned</span>
+            </h1>
+            <p class="hero-subtitle">
+                Tell us your dreams, budget, and interests — our AI crafts the perfect
+                end-to-end itinerary with real-time insights and seamless booking.
+            </p>
+            <div class="hero-search">
+                <div class="search-container">
+                    <div class="search-field">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="hero-destination" placeholder="Where do you want to go?"
+                            autocomplete="off">
+                        <div class="search-suggestions" id="search-suggestions"></div>
+                    </div>
+                    <div class="search-field">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" id="hero-date" min="">
+                    </div>
+                    <div class="search-field">
+                        <i class="fas fa-users"></i>
+                        <select id="hero-travelers">
+                            <option value="1">1 Traveler</option>
+                            <option value="2" selected>2 Travelers</option>
+                            <option value="3">3 Travelers</option>
+                            <option value="4">4 Travelers</option>
+                            <option value="5">5+ Travelers</option>
+                        </select>
+                    </div>
+                    <button class="search-btn" id="hero-search-btn">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        <span>Plan with AI</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="50000">0</span>
+                    <span class="stat-label">Trips Planned</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="180">0</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="98">0</span>
+                    <span class="stat-label">% Satisfaction</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="4900">0</span>
+                    <span class="stat-label">5★ Reviews</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Trending Destinations -->
+    <section class="section destinations-section" id="destinations">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-fire"></i> Trending Now</span>
+                <h2 class="section-title">Popular Destinations</h2>
+                <p class="section-desc">Discover the most sought-after destinations curated by our AI based on current
+                    trends, weather, and traveler reviews.</p>
+            </div>
+            <div class="destinations-grid" id="destinations-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-bolt"></i> Why Voyager AI</span>
+                <h2 class="section-title">Smart Planning, Effortless Travel</h2>
+                <p class="section-desc">Our AI analyzes thousands of data points to create the perfect trip just for
+                    you.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Itineraries</h3>
+                    <p>Our deep learning engine analyzes your preferences, budget, and travel style to craft
+                        personalized day-by-day plans.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Real-Time Conditions</h3>
+                    <p>Live weather forecasts, crowd levels, local events, and safety alerts ensure your plans are
+                        always optimal.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Budget Optimization</h3>
+                    <p>AI finds the best value accommodations, flights, and activities that match your budget without
+                        sacrificing quality.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-ticket"></i>
+                    </div>
+                    <h3>Seamless Booking</h3>
+                    <p>Book hotels, flights, tours, and restaurants directly within your itinerary — no switching
+                        between apps.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Smart Routing</h3>
+                    <p>Optimized travel routes minimize transit time so you spend more time experiencing and less time
+                        commuting.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Travel Insurance</h3>
+                    <p>Get personalized travel insurance recommendations and instant coverage for your entire trip.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trip Planning Wizard (Modal) -->
+    <div class="modal-overlay" id="planning-modal">
+        <div class="modal planning-modal">
+            <button class="modal-close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Progress Bar -->
+            <div class="wizard-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-circle">1</div>
+                        <span>Destination</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <span>Dates & Budget</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <span>Interests</span>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <span>Preferences</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 1: Destination -->
+            <div class="wizard-step active" id="wizard-step-1">
+                <div class="step-content">
+                    <h2><i class="fas fa-map-marker-alt"></i> Where's your next adventure?</h2>
+                    <p>Enter a destination or let our AI surprise you!</p>
+                    <div class="form-group">
+                        <label for="wizard-destination">Destination</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="wizard-destination" placeholder="e.g., Paris, Tokyo, Bali...">
+                        </div>
+                    </div>
+                    <div class="quick-picks">
+                        <span class="section-tag"><i class="fas fa-star"></i> Quick Picks</span>
+                        <div class="quick-picks-grid">
+                            <!-- Europe -->
+                            <button class="quick-pick" data-dest="Paris, France">🗼 Paris</button>
+                            <button class="quick-pick" data-dest="Santorini, Greece">🏖️ Santorini</button>
+                            <button class="quick-pick" data-dest="Rome, Italy">🏛️ Rome</button>
+                            <button class="quick-pick" data-dest="London, UK">🎡 London</button>
+                            <button class="quick-pick" data-dest="Barcelona, Spain">⛪ Barcelona</button>
+                            <button class="quick-pick" data-dest="Amsterdam, Netherlands">🌷 Amsterdam</button>
+                            <button class="quick-pick" data-dest="Prague, Czech Republic">🏰 Prague</button>
+                            <button class="quick-pick" data-dest="Reykjavik, Iceland">🌌 Reykjavik</button>
+                            <button class="quick-pick" data-dest="Amalfi Coast, Italy">🍋 Amalfi</button>
+                            <button class="quick-pick" data-dest="Swiss Alps, Switzerland">🏔️ Swiss Alps</button>
+                            <button class="quick-pick" data-dest="Dubrovnik, Croatia">🏴 Dubrovnik</button>
+                            <button class="quick-pick" data-dest="Vienna, Austria">🎵 Vienna</button>
+                            <!-- Asia -->
+                            <button class="quick-pick" data-dest="Tokyo, Japan">🗾 Tokyo</button>
+                            <button class="quick-pick" data-dest="Bali, Indonesia">🌴 Bali</button>
+                            <button class="quick-pick" data-dest="Dubai, UAE">🏙️ Dubai</button>
+                            <button class="quick-pick" data-dest="Maldives">🏝️ Maldives</button>
+                            <button class="quick-pick" data-dest="Bangkok, Thailand">🛕 Bangkok</button>
+                            <button class="quick-pick" data-dest="Kyoto, Japan">⛩️ Kyoto</button>
+                            <button class="quick-pick" data-dest="Singapore">🦁 Singapore</button>
+                            <button class="quick-pick" data-dest="Jaipur, India">🕌 Jaipur</button>
+                            <button class="quick-pick" data-dest="Seoul, South Korea">🇰🇷 Seoul</button>
+                            <button class="quick-pick" data-dest="Hanoi, Vietnam">🍜 Hanoi</button>
+                            <button class="quick-pick" data-dest="Petra, Jordan">🏜️ Petra</button>
+                            <!-- Americas -->
+                            <button class="quick-pick" data-dest="New York, USA">🗽 New York</button>
+                            <button class="quick-pick" data-dest="Cancún, Mexico">🌮 Cancún</button>
+                            <button class="quick-pick" data-dest="Rio de Janeiro, Brazil">🎭 Rio</button>
+                            <button class="quick-pick" data-dest="Machu Picchu, Peru">🦙 Machu Picchu</button>
+                            <button class="quick-pick" data-dest="Havana, Cuba">🚗 Havana</button>
+                            <button class="quick-pick" data-dest="Banff, Canada">🏔️ Banff</button>
+                            <button class="quick-pick" data-dest="Patagonia, Argentina">🧊 Patagonia</button>
+                            <button class="quick-pick" data-dest="Costa Rica">🦜 Costa Rica</button>
+                            <!-- Africa -->
+                            <button class="quick-pick" data-dest="Cape Town, South Africa">🌍 Cape Town</button>
+                            <button class="quick-pick" data-dest="Marrakech, Morocco">🕌 Marrakech</button>
+                            <button class="quick-pick" data-dest="Serengeti, Tanzania">🦁 Serengeti</button>
+                            <button class="quick-pick" data-dest="Cairo, Egypt">🐫 Cairo</button>
+                            <button class="quick-pick" data-dest="Zanzibar, Tanzania">🌊 Zanzibar</button>
+                            <!-- Oceania -->
+                            <button class="quick-pick" data-dest="Sydney, Australia">🦘 Sydney</button>
+                            <button class="quick-pick" data-dest="Queenstown, New Zealand">🏔️ Queenstown</button>
+                            <button class="quick-pick" data-dest="Bora Bora, French Polynesia">🏝️ Bora Bora</button>
+                            <button class="quick-pick" data-dest="Fiji Islands">🌺 Fiji</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-surprise" id="btn-surprise">
+                        <i class="fas fa-dice"></i> Surprise Me!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Dates & Budget -->
+            <div class="wizard-step" id="wizard-step-2">
+                <div class="step-content">
+                    <h2><i class="fas fa-calendar-check"></i> When & How Much?</h2>
+                    <p>Set your travel dates and budget range.</p>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wizard-start-date">Start Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-plane-departure"></i>
+                                <input type="date" id="wizard-start-date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="wizard-end-date">End Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-plane-arrival"></i>
+                                <input type="date" id="wizard-end-date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Budget per Person</label>
+                        <div class="budget-slider-container">
+                            <input type="range" id="budget-slider" min="500" max="15000" value="3000" step="100">
+                            <div class="budget-display">
+                                <span class="budget-amount" id="budget-amount">$3,000</span>
+                            </div>
+                            <div class="budget-labels">
+                                <span>Budget</span>
+                                <span>Mid-Range</span>
+                                <span>Luxury</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Travelers</label>
+                        <div class="traveler-counter">
+                            <div class="counter-group">
+                                <span class="counter-label"><i class="fas fa-user"></i> Adults</span>
+                                <div class="counter-controls">
+                                    <button class="counter-btn" data-action="decrease" data-target="adults">−</button>
+                                    <span class="counter-value" id="adults-count">2</span>
+                                    <button class="counter-btn" data-action="increase" data-target="adults">+</button>
+                                </div>
+                            </div>
+                            <div class="counter-group">
+                                <span class="counter-label"><i class="fas fa-child"></i> Children</span>
+                                <div class="counter-controls">
+                                    <button class="counter-btn" data-action="decrease" data-target="children">−</button>
+                                    <span class="counter-value" id="children-count">0</span>
+                                    <button class="counter-btn" data-action="increase" data-target="children">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Interests -->
+            <div class="wizard-step" id="wizard-step-3">
+                <div class="step-content">
+                    <h2><i class="fas fa-heart"></i> What excites you?</h2>
+                    <p>Select your interests so we can tailor your experience. Pick at least 3.</p>
+                    <div class="interests-grid" id="interests-grid">
+                        <button class="interest-tag" data-interest="beaches"><i class="fas fa-umbrella-beach"></i>
+                            Beaches</button>
+                        <button class="interest-tag" data-interest="culture"><i class="fas fa-landmark"></i> Culture &
+                            History</button>
+                        <button class="interest-tag" data-interest="food"><i class="fas fa-utensils"></i> Food &
+                            Dining</button>
+                        <button class="interest-tag" data-interest="adventure"><i class="fas fa-mountain"></i>
+                            Adventure</button>
+                        <button class="interest-tag" data-interest="nightlife"><i class="fas fa-cocktail"></i>
+                            Nightlife</button>
+                        <button class="interest-tag" data-interest="shopping"><i class="fas fa-shopping-bag"></i>
+                            Shopping</button>
+                        <button class="interest-tag" data-interest="nature"><i class="fas fa-tree"></i> Nature &
+                            Wildlife</button>
+                        <button class="interest-tag" data-interest="photography"><i class="fas fa-camera"></i>
+                            Photography</button>
+                        <button class="interest-tag" data-interest="wellness"><i class="fas fa-spa"></i> Wellness &
+                            Spa</button>
+                        <button class="interest-tag" data-interest="arts"><i class="fas fa-palette"></i> Arts &
+                            Museums</button>
+                        <button class="interest-tag" data-interest="sports"><i class="fas fa-futbol"></i>
+                            Sports</button>
+                        <button class="interest-tag" data-interest="romance"><i class="fas fa-heart"></i>
+                            Romance</button>
+                        <button class="interest-tag" data-interest="family"><i class="fas fa-people-group"></i> Family
+                            Fun</button>
+                        <button class="interest-tag" data-interest="architecture"><i
+                                class="fas fa-building-columns"></i> Architecture</button>
+                        <button class="interest-tag" data-interest="local"><i class="fas fa-street-view"></i> Local
+                            Life</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Preferences -->
+            <div class="wizard-step" id="wizard-step-4">
+                <div class="step-content">
+                    <h2><i class="fas fa-sliders"></i> Fine-tune your trip</h2>
+                    <p>Help our AI understand your travel style.</p>
+                    <div class="preference-group">
+                        <label>Travel Pace</label>
+                        <div class="pace-selector">
+                            <button class="pace-option" data-pace="relaxed">
+                                <i class="fas fa-couch"></i>
+                                <span>Relaxed</span>
+                                <small>2-3 activities/day</small>
+                            </button>
+                            <button class="pace-option active" data-pace="moderate">
+                                <i class="fas fa-walking"></i>
+                                <span>Moderate</span>
+                                <small>4-5 activities/day</small>
+                            </button>
+                            <button class="pace-option" data-pace="packed">
+                                <i class="fas fa-running"></i>
+                                <span>Packed</span>
+                                <small>6+ activities/day</small>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preference-group">
+                        <label>Accommodation Style</label>
+                        <div class="accommodation-options">
+                            <button class="accom-option" data-accom="hostel">
+                                <i class="fas fa-bed"></i>
+                                <span>Hostel</span>
+                            </button>
+                            <button class="accom-option" data-accom="hotel">
+                                <i class="fas fa-hotel"></i>
+                                <span>Hotel</span>
+                            </button>
+                            <button class="accom-option active" data-accom="boutique">
+                                <i class="fas fa-building"></i>
+                                <span>Boutique</span>
+                            </button>
+                            <button class="accom-option" data-accom="resort">
+                                <i class="fas fa-umbrella-beach"></i>
+                                <span>Resort</span>
+                            </button>
+                            <button class="accom-option" data-accom="villa">
+                                <i class="fas fa-house"></i>
+                                <span>Villa</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preference-group">
+                        <label>Dietary Preferences</label>
+                        <div class="diet-options">
+                            <button class="diet-option" data-diet="none">No Preference</button>
+                            <button class="diet-option" data-diet="vegetarian">🥬 Vegetarian</button>
+                            <button class="diet-option" data-diet="vegan">🌱 Vegan</button>
+                            <button class="diet-option" data-diet="halal">🍖 Halal</button>
+                            <button class="diet-option" data-diet="gluten-free">🌾 Gluten-Free</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard Navigation -->
+            <div class="wizard-nav">
+                <button class="btn btn-ghost" id="wizard-prev" style="visibility: hidden;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="btn btn-primary" id="wizard-next">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Loading Screen -->
+    <div class="modal-overlay" id="ai-loading-modal">
+        <div class="ai-loading">
+            <div class="ai-brain">
+                <div class="brain-ring"></div>
+                <div class="brain-ring"></div>
+                <div class="brain-ring"></div>
+                <i class="fas fa-robot"></i>
+            </div>
+            <h2>AI is crafting your perfect trip</h2>
+            <div class="ai-loading-steps">
+                <div class="loading-step active" id="ls-1">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    <span>Analyzing your preferences...</span>
+                </div>
+                <div class="loading-step" id="ls-2">
+                    <i class="fas fa-circle-notch"></i>
+                    <span>Checking real-time conditions...</span>
+                </div>
+                <div class="loading-step" id="ls-3">
+                    <i class="fas fa-circle-notch"></i>
+                    <span>Finding the best deals...</span>
+                </div>
+                <div class="loading-step" id="ls-4">
+                    <i class="fas fa-circle-notch"></i>
+                    <span>Optimizing your itinerary...</span>
+                </div>
+                <div class="loading-step" id="ls-5">
+                    <i class="fas fa-circle-notch"></i>
+                    <span>Finalizing your dream trip...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Itinerary Results Page -->
+    <div class="itinerary-page" id="itinerary-page" style="display: none;">
+        <div class="itinerary-header">
+            <div class="container">
+                <button class="btn btn-ghost" id="back-to-home">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <div class="itinerary-title-area">
+                    <h1 id="itinerary-dest-title"></h1>
+                    <div class="itinerary-meta">
+                        <span><i class="fas fa-calendar"></i> <span id="itinerary-dates"></span></span>
+                        <span><i class="fas fa-users"></i> <span id="itinerary-travelers"></span></span>
+                        <span><i class="fas fa-wallet"></i> <span id="itinerary-budget"></span></span>
+                    </div>
+                </div>
+                <div class="itinerary-actions">
+                    <button class="btn btn-ghost" id="btn-save-trip">
+                        <i class="far fa-heart"></i> Save
+                    </button>
+                    <button class="btn btn-ghost" id="btn-share-trip">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                    <button class="btn btn-primary" id="btn-book-all">
+                        <i class="fas fa-shopping-cart"></i> Book All
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-time Dashboard -->
+        <div class="realtime-dashboard">
+            <div class="container">
+                <div class="dashboard-cards">
+                    <div class="dash-card weather-card">
+                        <div class="dash-card-icon"><i class="fas fa-sun"></i></div>
+                        <div class="dash-card-content">
+                            <h4>Weather Forecast</h4>
+                            <p class="dash-value" id="dash-weather">28°C Sunny</p>
+                            <small>Perfect for outdoor activities</small>
+                        </div>
+                    </div>
+                    <div class="dash-card crowd-card">
+                        <div class="dash-card-icon"><i class="fas fa-people-group"></i></div>
+                        <div class="dash-card-content">
+                            <h4>Crowd Level</h4>
+                            <p class="dash-value" id="dash-crowd">Moderate</p>
+                            <div class="crowd-bar">
+                                <div class="crowd-fill" style="width: 55%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card event-card">
+                        <div class="dash-card-icon"><i class="fas fa-calendar-star"></i></div>
+                        <div class="dash-card-content">
+                            <h4>Local Events</h4>
+                            <p class="dash-value" id="dash-events">3 events nearby</p>
+                            <small>Food festival this weekend!</small>
+                        </div>
+                    </div>
+                    <div class="dash-card safety-card">
+                        <div class="dash-card-icon"><i class="fas fa-shield-check"></i></div>
+                        <div class="dash-card-content">
+                            <h4>Safety Score</h4>
+                            <p class="dash-value" id="dash-safety">9.2/10</p>
+                            <small>Very safe destination</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Itinerary Content -->
+        <div class="itinerary-content">
+            <div class="container">
+                <div class="itinerary-layout">
+                    <!-- Day Selection Sidebar -->
+                    <div class="day-sidebar">
+                        <h3><i class="fas fa-list-timeline"></i> Your Days</h3>
+                        <div class="day-list" id="day-list">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="trip-summary-card">
+                            <h4><i class="fas fa-chart-pie"></i> Budget Breakdown</h4>
+                            <div class="budget-breakdown" id="budget-breakdown">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day Detail -->
+                    <div class="day-detail" id="day-detail">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal booking-modal">
+            <button class="modal-close" id="booking-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="booking-content" id="booking-content">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Trips Modal -->
+    <div class="modal-overlay" id="saved-modal">
+        <div class="modal saved-modal">
+            <button class="modal-close" id="saved-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-heart"></i> Saved Trips</h2>
+            <div class="saved-trips-list" id="saved-trips-list">
+                <div class="empty-state">
+                    <i class="fas fa-suitcase-rolling"></i>
+                    <p>No saved trips yet. Start planning your first adventure!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Voyager<span class="logo-ai">AI</span></span>
+                    </a>
+                    <p>Your intelligent travel companion. Powered by AI, designed for wanderlust.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <a href="#">Destinations</a>
+                    <a href="#">Travel Guides</a>
+                    <a href="#">Best Deals</a>
+                    <a href="#">Trip Ideas</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 VoyagerAI. All rights reserved. Built with <i class="fas fa-heart"></i> and AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
